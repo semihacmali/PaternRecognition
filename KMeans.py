@@ -11,6 +11,12 @@ def inputData(column, row):
     data = [[int((input("[" +str(r) +"] [" +str(c) +"] : "))) for c in range(column)] for r in range(row)]
     return np.array(data)
 
+
+def recalculate_centroids(centroids, clusters, k):
+    for i in range(k):
+        centroids[i] = np.average(clusters[i], axis = 0)
+    return centroids
+
 class KMeans():
     
     def __init__(self, n_cluster = 3, max_iter = 10, distance_fun = "eucledian"):
@@ -28,10 +34,7 @@ class KMeans():
         X2 = np.array(X2)
         return pow(sum(pow(abs(X1-X2),self.power)), 1/self.power)
     
-    def recalculate_centroids(centroids, clusters, k):
-        for i in range(k):
-            centroids[i] = np.average(clusters[i], axis = 0)
-        return centroids
+
     
     
     def recalculate_clusters(self, data, centroids, k):
@@ -65,7 +68,7 @@ class KMeans():
         
         for i in range(1, self.iter):
             clusters = self.recalculate_clusters(data, centroids, self.k)
-            nwcen = self.recalculate_centroids(centroids, clusters, self.k)
+            nwcen = recalculate_centroids(centroids, clusters, self.k)
             if(nwcen == centroids):
                 return clusters
             else:
