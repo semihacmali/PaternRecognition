@@ -12,10 +12,7 @@ def inputData(column, row):
     return np.array(data)
 
 
-def recalculate_centroids(centroids, clusters, k):
-    for i in range(k):
-        centroids[i] = np.average(clusters[i], axis = 0)
-    return centroids
+
 
 class KMeans():
     
@@ -28,6 +25,8 @@ class KMeans():
             self.power = 1
         else:
             self.power = 2
+        self.centroids = {}
+        self.clusters = {}
     
     def distance(self, X1, X2):
         X1 = np.array(X1)
@@ -35,52 +34,56 @@ class KMeans():
         return pow(sum(pow(abs(X1-X2),self.power)), 1/self.power)
     
 
+    def recalculate_centroids(self):
+        for i in range(self.k):
+            self.centroids[i] = np.average(self.clusters[i], axis = 0)
+        return self.centroids
     
-    
-    def recalculate_clusters(self, data, centroids, k):
+    def recalculate_clusters(self, data):
         
-        clusters = {}
+        #clusters = {}
         
-        for i in range(k):
-            clusters[i] = []
+        for i in range(self.k):
+            self.clusters[i] = []
         for X in data:
             euc_dis = []
-            for j in range(k):
-                euc_dis.append(self.distance(X, centroids[j]))
-            clusters[euc_dis.index(min(euc_dis))].append(X)
+            for j in range(self.k):
+                euc_dis.append(self.distance(X, self.centroids[j]))
+            self.clusters[euc_dis.index(min(euc_dis))].append(X)
         
-        return clusters
+        return self.clusters
     
     
     def fit(self, data):
-        clusters = {}
-        centroids = {}
+        #clusters = {}
+        #centroids = {}
         first_index = random.sample(range(0,len(data)),self.k)
         for i in range(self.k):
-            clusters[i] = []
-            centroids[i] = first_index[i]
+            self.clusters[i] = []
+            self.centroids[i] = first_index[i]
             
         for X in data:
             euc_dis = []
             for j in range(self.k):
-                euc_dis.append(self.distance(X, centroids[j]))
-            clusters[euc_dis.index(min(euc_dis))].append(X)
+                euc_dis.append(self.distance(X, self.centroids[j]))
+            self.clusters[euc_dis.index(min(euc_dis))].append(X)
         
         for i in range(1, self.iter):
-            clusters = self.recalculate_clusters(data, centroids, self.k)
-            nwcen = recalculate_centroids(centroids, clusters, self.k)
-            if(nwcen == centroids):
-                return clusters
+            self.clusters = self.recalculate_clusters(data)
+            nwcen = self.recalculate_centroids()
+            if(nwcen == self.centroids):
+                return self.clusters
             else:
-                centroids = nwcen
+                self.centroids = nwcen
         
-        return clusters
+        return self.clusters
     
 
 data = inputData(2, 4)
 
-clus = KMeans(n_cluster=2, max_iter=5)    
+clus = KMeans(n_cluster=2, max_iter=5, distance_fun = "eucledian")    
 
 clusters = clus.fit(data)            
 
-
+clus.centroids
+clus.clusters
