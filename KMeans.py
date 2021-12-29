@@ -34,7 +34,7 @@ class KMeans():
         return centroids
     
     
-    def recalculate_clusters(data, centroids, k):
+    def recalculate_clusters(self, data, centroids, k):
         
         clusters = {}
         
@@ -43,7 +43,7 @@ class KMeans():
         for X in data:
             euc_dis = []
             for j in range(k):
-                euc_dis.append(distance(X, centroids[j]))
+                euc_dis.append(self.distance(X, centroids[j]))
             clusters[euc_dis.index(min(euc_dis))].append(X)
         
         return clusters
@@ -52,20 +52,20 @@ class KMeans():
     def fit(self, data):
         clusters = {}
         centroids = {}
-        first_index = random.sample(range(0,len(data)),k)
-        for i in range(k):
+        first_index = random.sample(range(0,len(data)),self.k)
+        for i in range(self.k):
             clusters[i] = []
             centroids[i] = first_index[i]
             
         for X in data:
             euc_dis = []
-            for j in range(k):
-                euc_dis.append(distance(X, centroids[j]))
+            for j in range(self.k):
+                euc_dis.append(self.distance(X, centroids[j]))
             clusters[euc_dis.index(min(euc_dis))].append(X)
         
         for i in range(1, self.iter):
-            clusters = recalculate_clusters(data, centroids, self.k)
-            nwcen = recalculate_centroids(centroids, clusters, self.k)
+            clusters = self.recalculate_clusters(data, centroids, self.k)
+            nwcen = self.recalculate_centroids(centroids, clusters, self.k)
             if(nwcen == centroids):
                 return clusters
             else:

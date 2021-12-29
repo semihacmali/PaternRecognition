@@ -7,6 +7,7 @@ Created on Wed Dec  1 13:32:50 2021
 
 import numpy as np
 
+
 def inputData(column, row):
     data = [[float((input("[" +str(r) +"] [" +str(c) +"] : "))) for c in range(column)] for r in range(row)]
     return np.array(data)
