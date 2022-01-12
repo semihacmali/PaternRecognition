@@ -18,10 +18,6 @@ def distance(X1, X2, p = 2):
     X2 = np.array(X2)
     return pow(sum(pow(abs(X1-X2),p)), 1/p)
 
-
-
-    
-
 class KNN:
     def __init__(self, k):
         self.k = k
@@ -47,15 +43,21 @@ class KNN:
             out.append(ans)
         return out
     
-    
-x_train = inputData(2,12)
-y_train = inputData(1,12)
-
-x_test = inputData(2,1)
 
 
-knn = KNN(4)
-knn.fit(x_train, y_train)
-y_test = knn.predict(x_test)
+# data = np.genfromtxt("E:\\Doktora\\Örüntü Tanıma\\datas\\KNN.csv", delimiter=',', skip_header=1)   
+# y_train1 = data[:,-1]
+# y_train1 = y_train1[..., None]
+# x_train1 = data[:,:-1]
+# x_train = inputData(2,12)
+# y_train = inputData(1,12)
+
+# y_train1[1]
+# #²x_test = np.array([160,62])
+# x_test = inputData(2,1)
+
+# knn = KNN(3)
+# knn.fit(x_train, y_train)
+# y_test = knn.predict(x_test)
 
 

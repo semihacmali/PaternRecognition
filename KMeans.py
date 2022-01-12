@@ -6,10 +6,12 @@ This is a temporary script file.
 """
 import numpy as np
 import random
+import matplotlib.pyplot as plt
 
-def inputData(column, row):
-    data = [[int((input("[" +str(r) +"] [" +str(c) +"] : "))) for c in range(column)] for r in range(row)]
-    return np.array(data)
+
+# def inputData(column, row):
+#     data = [[int((input("[" +str(r) +"] [" +str(c) +"] : "))) for c in range(column)] for r in range(row)]
+#     return np.array(data)
 
 
 
@@ -79,11 +81,22 @@ class KMeans():
         return self.clusters
     
 
-data = inputData(2, 4)
+# data = inputData(2, 4)
 
-clus = KMeans(n_cluster=2, max_iter=5, distance_fun = "eucledian")    
+# clus = KMeans(n_cluster=2, max_iter=5, distance_fun = "eucledian")    
 
-clusters = clus.fit(data)            
+# clusters = clus.fit(data)            
 
-clus.centroids
-clus.clusters
+# clus.centroids
+# clus.clusters
+
+
+#plot Kmeans
+# colors = list("rgbcmyk")
+# for key in clus.clusters:
+#     for value in clus.clusters[key]:
+#         plt.scatter(value[0], value[1] , color = colors[key])
+# plt.show()
+
+
+

@@ -34,11 +34,11 @@ def dataCovMa(data):
     return np.array([[dataCov(data[:,i], data[:,j]) for j in range(len(data[0]))] for i in range(len(data[0]))])
             
 
-data = inputData(2, 10)
+#data = inputData(2, 10)
 
-mean = dataMean(data)
-std = pow(dataVar(data), 1/2)
-var = dataVar(data)
-CovMat = dataCovMa(data)
+#mean = dataMean(data)
+#std = pow(dataVar(data), 1/2)
+#var = dataVar(data)
+#CovMat = dataCovMa(data)
 
 

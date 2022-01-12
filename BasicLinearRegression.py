@@ -42,8 +42,17 @@ class BasicLinearReg:
 
 
 
-data = inputData(2, 5)
+# data = inputData(2, 5)
+# data = np.genfromtxt("E:\\Doktora\\Örüntü Tanıma\\datas\\LinearReg.csv", delimiter=',', skip_header=1)  
+# baLiRe = BasicLinearReg()
+# baLiRe.fit(data)
+# baLiRe.predict(7)
+# y = baLiRe.b * data[:,0] + baLiRe.a + baLiRe.e
+# y1 = baLiRe.b * data[:,0] + baLiRe.a
 
-baLiRe = BasicLinearReg()
-baLiRe.fit(data)
-baLiRe.predict(7)
+# plt.plot(data[:,0], y, '-r', label = 'y = bx+a+e')
+# plt.plot(data[:,0], y1, '--b', label = 'y = bx+a')
+# plt.plot(data[:,0], data[:,1], 'o', label = 'x,y')
+# plt.legend()
+# plt.show()
+
